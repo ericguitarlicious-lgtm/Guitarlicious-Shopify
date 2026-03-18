@@ -1,4 +1,4 @@
-# How to Add New PWP Section?
+# PWP Custom Snippet for Shopify
 
 ## 1. Render Code to Show The PWP Section
 
@@ -33,11 +33,13 @@ You may refer to this Google Sheet to auto generate all the required code and ta
 
 ### Steps 0 :
 
-Enter the product category and discount value. 
+Enter the product category and discount value. You only need to type in column A and column C in `PWP Create New: Input Here`.
 
 For example, `electric guitar` and `10` for 10% discount for add on products applied to electric guitars.
 
 *** This is the only step you need to type on the Google Sheet, don't type anything after this to avoid overiding the formulas.
+*** After this step, go to the next tab `PWP Create New: Output (JUST COPY, DO NOT EDIT)`
+
 
 ### Step 1 :
 Main product here refer to the main product which offer pwp promotions on other addons products. Add 1 tag to link the Main Product (s)
@@ -62,13 +64,18 @@ Example :
 
 ### STEP 3 : 
 
-Ensure You Have These Product Collection Created
+Ensure You Have the 2 required Product Collection Created, with the name as follows
+
+``` pwp-{discount value}-{category} ``` 
+``` pwp-{discount value} ``` 
 
 Example : 
 
-``` pwp-10 ```
+1. ``` pwp-10-electric guitar ``` 
+For discount, set the product tag automatically applies to `pwp-10` and `pwp-electric guitar`
 
-``` pwp-10-electric guitar ```
+2. ``` pwp-10 ```
+For render, only need to add if theres a new percentage we've never use before.
 
 
 ### STEP 4 : 
