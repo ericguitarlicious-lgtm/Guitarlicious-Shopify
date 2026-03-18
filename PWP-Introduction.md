@@ -6,10 +6,16 @@ Below is the liquid render code to show the section in product detail page templ
 
 The values of `discount_value` and `contain_tag` need to be altered according to situation.
 
+For Shopify drag-and-drop insert Custom Code feature:
 ```liquid
 <div class="page-width">
     {% render '_pwp-collection-list-2', discount_values: "15,20,25,30", contain_tag: 'electric guitar' %}
 </div>
+```
+
+For adding through manual code edit:
+```liquid
+    {% render '_pwp-collection-list-2', discount_values: "15,20,25,30", contain_tag: 'electric guitar' %}
 ```
 
 Input fields: 
