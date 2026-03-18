@@ -15,7 +15,7 @@ For Shopify drag-and-drop insert Custom Code feature:
 
 For adding through manual code edit:
 ```liquid
-    {% render '_pwp-collection-list-2', discount_values: "15,20,25,30", contain_tag: 'electric guitar' %}
+{% render '_pwp-collection-list-2', discount_values: "15,20,25,30", contain_tag: 'electric guitar' %}
 ```
 
 Input fields: 
