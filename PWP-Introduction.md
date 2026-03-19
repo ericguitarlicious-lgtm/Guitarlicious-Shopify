@@ -68,16 +68,27 @@ You may refer to this Google Sheet to auto generate all the required code and ta
 
 ### Steps 0 :
 
-Enter the product category and discount value. You only need to type in column A and column C in `PWP Create New: Input Here`.
+Enter the product category and discount value. You only need to type in **column A** and **column C** in `PWP Create New: Input Here`.
+
+<img width="1204" height="909" alt="image" src="https://github.com/user-attachments/assets/acb10635-8335-40c6-bca3-3817b1af6611" />
+
 
 For example, `electric guitar` and `10` for 10% discount for add on products applied to electric guitars.
 
 *** This is the only step you need to type on the Google Sheet, don't type anything after this to avoid overiding the formulas.
-*** After this step, go to the next tab `PWP Create New: Output (JUST COPY, DO NOT EDIT)`
+
+After that, go to the next tab `PWP Create New: Output (JUST COPY, DO NOT EDIT)`
+
+<img width="1659" height="916" alt="image" src="https://github.com/user-attachments/assets/8ec5597e-1131-4d54-a442-44f59548a375" />
+
+
+All the codes you need will auto-generate here, no code typing required in the entire process.
 
 <br>
 
 ### Step 1 :
+<img width="573" height="354" alt="image" src="https://github.com/user-attachments/assets/4c574a05-2110-4a85-bad6-f143eba0010c" />
+
 Main product here refer to the main product which offer pwp promotions on other addons products. Add 1 tag to link the Main Product (s)
  
 ``` pwp-enable ```
@@ -85,6 +96,7 @@ Main product here refer to the main product which offer pwp promotions on other 
 <br>
 
 ### STEP 2 :
+<img width="357" height="201" alt="image" src="https://github.com/user-attachments/assets/ab71f2fd-ee2a-48fd-8f9b-541d55120dbb" />
 
 Tag to link Addon Products, need to add 2 Tags for Addon Product.
 `pwp-{discount value}`   `pwp-{product category}`
@@ -107,7 +119,13 @@ Ensure You Have the 2 required Product Collection Created, with the name as foll
 
 ``` pwp-{discount value}-{category} ``` - This collection will be selected while setting up Shopify 'Discount' feature.
 
+<img width="1170" height="912" alt="image" src="https://github.com/user-attachments/assets/2d50b02a-9b54-43f0-a0dc-1f82ac05d9fc" />
+
+
 ``` pwp-{discount value} ``` - This is required to make the custom code works.
+
+<img width="1299" height="833" alt="image" src="https://github.com/user-attachments/assets/9b1b3d7d-235c-4d53-91c8-61491accd6d8" />
+
 
 Example : 
 
@@ -123,9 +141,25 @@ For render, only need to add if theres a new percentage we've never use before.
 
 Add Custom Code on Website Template(Place at Custom code in Shopify Editor or Custom Liquid File)"
 
-Example : 
+**For Shopify drag-and-drop insert Custom Code feature:**
 
-``` pwp-electric guitar ```
+<img width="1237" height="538" alt="image" src="https://github.com/user-attachments/assets/0a95981e-8058-4303-aae9-d7cd4c145792" />
+
+
+```liquid
+{% render '_pwp-collection-list-2', discount_values: "15,20,25,30", contain_tag: 'electric guitar' %}
+```
+
+
+**For adding through manual code edit:**
+
+<img width="928" height="429" alt="image" src="https://github.com/user-attachments/assets/fe725ffc-3134-401d-a0a2-4c5c21b01dee" />
+
+```liquid
+<div class="page-width">
+    {% render '_pwp-collection-list-2', discount_values: "15,20,25,30", contain_tag: 'electric guitar' %}
+</div>
+```
 
 <br><br><br><br>
 ---
