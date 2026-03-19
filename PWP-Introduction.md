@@ -31,14 +31,14 @@ Input fields:
 
     - Existing "contain_tag" :
 
-        - `electric guitar` For all electric guitars.
-        - `classical guitar` For all classical guitars.
-        - `acoustic guitar` For all acoustic guitars.
-        - `bass guitar` For all bass guitars.
-        - `ukulele` For all ukuleles.
-        - `digital and acoustic drum` For digital and acoustic drum
-        - `keyboard and piano` For all keyboard and piano.
-        - `dj` For all DJ related devices & equipments.
+        - `electric guitar` - For all electric guitars.
+        - `classical guitar` - For all classical guitars.
+        - `acoustic guitar` - For all acoustic guitars.
+        - `bass guitar` - For all bass guitars.
+        - `ukulele` - For all ukuleles.
+        - `digital and acoustic drum` - For digital and acoustic drum
+        - `keyboard and piano` - For all keyboard and piano.
+        - `dj` - For all DJ related devices & equipments.
 
 <br><br>
 
@@ -88,9 +88,9 @@ Example :
 
 Ensure You Have the 2 required Product Collection Created, with the name as follows
 
-``` pwp-{discount value}-{category} ``` 
+``` pwp-{discount value}-{category} ``` - This collection will be selected while setting up Shopify 'Discount' feature.
 
-``` pwp-{discount value} ``` 
+``` pwp-{discount value} ``` - This is required to make the custom code works.
 
 Example : 
 
