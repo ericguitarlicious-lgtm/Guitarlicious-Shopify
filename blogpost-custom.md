@@ -1,3 +1,11 @@
+## 
+
+```liquid
+
+```
+
+
+
 ## __shortcode-manager.liquid
 
 ``` liquid
@@ -90,3 +98,55 @@ DEBUG: {{ raw_string }}
     </button>
 </div>
 ```
+
+## Expert Box
+
+### _guitar-expert-box.liquid
+```liquid
+<div class="quotebox-blog">
+    <div style="flex-shrink: 0;">
+        <img alt="Guitar Specialist Team" 
+             src="https://cdn.shopify.com/s/files/1/0698/8473/9841/files/Gemini_Generated_Image_k17h8dk17h8dk17h.png?v=1765002297" 
+             class="rounded-img">
+    </div>
+    <div>
+        <h4>
+            <b>Recommended By Guitarlicious Specialist Team</b>
+        </h4>
+        <p>
+            This online guitar guide is recommended by our in-house guitar specialists, whose expertise is built upon years of hands-on experience and deep knowledge of the instrument. Based on their practical application and professional vetting, they have found this resource to be an exceptional and reliable tool for guitarists of all levels.
+        </p>
+    </div>
+</div>
+```
+
+### _drum-expert-box.liquid
+```liquid
+<div class="quotebox-blog">
+  <div>
+      <img class="rounded-img showImg" alt="Drum Specialist" data-src="https://cdn.shopify.com/s/files/1/0698/8473/9841/files/Gemini_Generated_Image_3urqe93urqe93urq.png?v=1765001368" data-srcset="" srcset="" src="https://cdn.shopify.com/s/files/1/0698/8473/9841/files/Gemini_Generated_Image_3urqe93urqe93urq.png?v=1765001368"></div>
+  <div>
+    <h4 style="text-align: left; margin: 0;"><b>Recommended By Guitarlicious Drum Specialist Team</b></h4>
+    <p><br><i>This online guide is recommended by our team of drum specialists, whose expertise is built upon years of hands-on experience and deep knowledge of drumming instruments. Based on their practical application and professional vetting, they have found these resources and knowledges to be an exceptional and reliable tool for drummers of all levels.</i></p>
+  </div>
+</div>
+
+<br>
+```
+
+
+## Other Buttons & Formatting
+
+### _btn-comingsoon.liquid
+```liquid
+<button class="btn-comingsoon"> Coming Soon </button>
+```
+### _btn-viewproduct.liquid
+```liquid
+<button class="btn-viewproduct"> View Product </button>
+```
+### _hr-line.liquid
+```liquid
+<hr>
+```
+
