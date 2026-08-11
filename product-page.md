@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
-##FAQ
+## FAQ
 
 ### _faq-general.liquid
 
