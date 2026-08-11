@@ -79,3 +79,14 @@ DEBUG: {{ raw_string }}
   {%- endif -%}
 </a>
 ```
+## _blog-ending.liquid
+
+```liquid
+<hr>
+
+<div style="text-align: center;">
+    <button onclick="window.location.href='https://guitarlicious-online.com/'" class="btn-homepage">
+    Back To Homepage
+    </button>
+</div>
+```
