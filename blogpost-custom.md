@@ -1,4 +1,4 @@
-### 💎 __shortcode-manager.liquid
+## 💎 __shortcode-manager.liquid
 
 ``` liquid
 {% assign output = content %}
