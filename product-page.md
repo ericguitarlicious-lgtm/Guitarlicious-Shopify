@@ -1,3 +1,203 @@
+## _location-detect-3.liquid
+
+```liquid
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+  pickup-availability-preview.pickup-availability-preview {
+    width: 100% !important;
+    border: 1px solid #878787 !important;
+  }
+
+  svg.icon.icon-pin {
+    margin: 0rem 2.5rem !important;
+    height: 7rem !important;
+  }
+
+  .deliverycards-grid {
+      grid-template-columns: 1fr 3fr;
+      background-color: #f5f5f5 !important;
+      border-radius: 13px;
+      align-items: center;
+      border: 1px solid #878787;
+  }
+</style>
+
+
+{%- if show_pickup_availability -%}
+  <custom-pickup-check 
+    id="CustomPickup-{{ section.id }}"
+    class=""
+    data-root-url="{{ routes.root_url }}"
+    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  >
+    {%- comment -%} 
+      The template is required by the script for error handling, 
+      but it won't show unless the fetch fails. 
+    {%- endcomment -%}
+    <template>
+      <div style="padding: 15px; text-align: center; background: #fff; border-radius: 13px; border: 1px solid #eee;">
+        <p style="margin:0; font-size: 0.85rem; color: #666;">Pickup status currently unavailable.</p>
+      </div>
+    </template>
+
+    {%- comment -%} 
+      NEW CUSTOM BOX: Initialized with display: none. 
+      The JS will change this to display: grid ONLY if the item is in stock.
+    {%- endcomment -%}
+    <div id="PickupBox-{{ section.id }}" class="mlt-pg-col-2 margin-bottom-10px deliverycards-grid" 
+         style="display: none; grid-template-columns: 1fr 3fr; background-color: #f5f5f5 !important; border-radius: 13px; align-items: center; border: 1px solid #878787; cursor: pointer; min-height: 100px;">
+      
+      <div style="text-align: center;">
+        <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 3rem; color: #aab5ae; padding: 1rem;"></i>
+      </div>
+      
+      <div style="padding: 15px 15px 15px 0;">
+        <p id="PickupTitle-{{ section.id }}" style="font-weight: 700; margin: 0; font-size: 1rem; color: #000;">
+          Pickup Available at Ara Damansara
+        </p>
+        <p id="PickupStatus-{{ section.id }}" style="margin-top: 5px; color:#6f6e6e; font-size: 0.9rem; line-height: 1.4;">
+          Checking availability...
+        </p>
+      </div>
+    </div>
+  </custom-pickup-check>
+
+  {%- comment -%} Asset name updated to match your file {%- endcomment -%}
+  <script src="{{ '_custom-pickup-availability.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div class="mlt-pg-col-2 margin-bottom-10px deliverycards-grid">
+  <div class="margin-right-25px">
+
+      <i class="fa fa-whatsapp" aria-hidden="true" style="font-family: 'Font Awesome 6 Brands', 'Font Awesome 5 Brands', 'FontAwesome';font-style: normal;color: #6ad191;wi;width=: 100%;width=: 100%;width=: 100;width=: 10;dth=: 1;font-size: 6rem;text-align: center;padding: 1rem 1rem 1rem 4.5rem;"></i>
+  </div>
+  
+  <div>
+    <p style="
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 0;
+">
+      Same Day Delivery (KLANG VALLEY ONLY)
+    </p>
+    <p style="margin-top: 5px;color:#6f6e6e">
+      For orders above RM200 placed before 5.00 PM. <br>
+
+      {% assign current_branch = shop.metaobjects.branch_info['gtlc-ad'] %}
+      <a style="display: block !important" 
+        href="{{ current_branch.ws_link.value.url }}?text=I'm%20interested%20in%20this%20product%20(Same%20Day%20Delivery):%20{{ shop.url }}{{ product.url }}" 
+        target="_blank" 
+        rel="noopener noreferrer">
+        Whatsapp Us to Arrange Now!
+      </a>
+
+    </p>
+  </div>
+</div>
+
+<div class="mlt-pg-col-2 margin-bottom-10px deliverycards-grid" >
+  <div>
+    <i class="fa fa-truck-fast" aria-hidden="true" style="font-family: 'Font Awesome 6 Brands', 'Font Awesome 5 Brands', 'FontAwesome';font-style: normal;color: #aab5ae;wi;width=: 100%;width=: 100%;width=: 100;width=: 10;dth=: 1;font-size: 6rem;text-align: center;padding: 1rem 1rem 1rem 4.5rem;"></i>
+  </div>
+  
+  <div>
+    <p id="msia-status-text2" style="
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 0;">
+      STANDARD DELIVERY
+    </p>
+    <p id="msia-date-text" style="margin-top: 5px;color:#6f6e6e">
+      Order now and get it by <b><span id="delivery-range2">Calculating...</span></b> . <br> We pack with care & ship immediately. 
+    </p>
+  </div>
+</div>
+
+  
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      const region = data.region;
+      const statusText = document.getElementById('msia-status-text2');
+      
+      const westStates = ["Selangor", "Kuala Lumpur", "Johor", "Penang", "Perak", "Pahang", "Negeri Sembilan", "Kedah", "Melaka", "Terengganu", "Kelantan", "Perlis"];
+      const eastStates = ["Sabah", "Sarawak"];
+      
+      if (westStates.includes(region)) {
+        statusText.innerHTML = "Standard Delivery: <b>West Malaysia</b>";
+        calculateDates(2, 5); 
+      } else if (eastStates.includes(region)) {
+        statusText.innerHTML = "Standard Delivery: <b>East Malaysia</b>";
+        calculateDates(2, 7); 
+      }
+    })
+    .catch(err => console.log("Location detection skipped, showing default."));
+
+  function calculateDates(minDays, maxDays) {
+    const today = new Date();
+    const minDate = new Date();
+    minDate.setDate(today.getDate() + minDays);
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + maxDays);
+
+    const options = { day: '2-digit', month: 'short' };
+    const minStr = minDate.toLocaleDateString('en-GB', options);
+    const maxStr = maxDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+    const rangeEl = document.getElementById('delivery-range2');
+    if(rangeEl) rangeEl.innerText = `${minStr} - ${maxStr}`;
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Find the Add-on section
+  const pwpInner = document.querySelector('.pwp-section');
+  const addOnSection = pwpInner ? pwpInner.closest('.shopify-section') : null;
+
+  if (!addOnSection) return;
+
+  // 2. Drop an invisible anchor exactly where it natively lives on PC
+  const pcAnchor = document.createElement('div');
+  pcAnchor.style.display = 'none';
+  pcAnchor.id = 'addon-pc-anchor';
+  addOnSection.parentNode.insertBefore(pcAnchor, addOnSection);
+
+  function handleCrossSectionLayout() {
+    // Look for the Pickup block (evaluates fresh in case it loaded late)
+    const pickupBlock = document.querySelector('pickup-availability') || document.querySelector('custom-pickup-check');
+
+    if (window.innerWidth < 768) {
+      // MOBILE: Move it exactly above the Pickup block
+      if (pickupBlock && pickupBlock.parentElement && addOnSection.nextElementSibling !== pickupBlock) {
+        pickupBlock.parentElement.insertBefore(addOnSection, pickupBlock);
+      }
+    } else {
+      // PC: Snap it right back to its original invisible anchor so it never shifts incorrectly
+      if (addOnSection.previousElementSibling !== pcAnchor) {
+        pcAnchor.parentNode.insertBefore(addOnSection, pcAnchor.nextSibling);
+      }
+    }
+  }
+
+  // Run on page load
+  handleCrossSectionLayout();
+  
+  // Backup runs for lazy-loading apps
+  setTimeout(handleCrossSectionLayout, 1000);
+  setTimeout(handleCrossSectionLayout, 2500);
+  
+  // Run when the screen is resized or rotated
+  window.addEventListener('resize', handleCrossSectionLayout);
+});
+</script>
+```
+
+
 ## _btn-pricematch.liquid
 
 ```liquid
@@ -461,3 +661,5 @@
 {% render '_faq-general' %}
 
 ```
+
+
