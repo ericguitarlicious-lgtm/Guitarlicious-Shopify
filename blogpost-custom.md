@@ -1,4 +1,6 @@
-``` liquiz
+### 💎 __shortcode-manager.liquid
+
+``` liquid
 {% assign output = content %}
 
 {%- if output contains '[guitar-expert-box]' -%}
@@ -32,4 +34,48 @@
 {%- endif -%}
 
 {{ output }}
+```
+
+## _blog-button.liquid
+
+``` liquid
+
+
+{%- comment -%}
+  Input: raw_string (e.g. "blog-button: /products/guitar | 0 | #ff0000")
+  Index mapping:
+  - params[0]: URL
+  - params[1]: Status (0 = Coming Soon, 2 = View Product)
+  - params[2]: Optional HEX Color
+{%- endcomment -%}
+ <p style="color: blue !important; display: block !important;">TEST: BUTTON SNIPPET IS ALIVE</p>
+DEBUG: {{ raw_string }}
+
+{%- assign data = raw_string | split: ':' | last -%}
+{%- assign params = data | split: '|' -%}
+
+{%- assign theURL  = params[0] | strip -%}
+{%- assign status  = params[1] | strip -%}
+{%- assign custom_color = params[2] | strip -%}
+
+{%- comment -%} 
+  Define a default color if the 3rd variable is missing 
+{%- endcomment -%}
+{%- if custom_color == blank -%}
+  {%- assign btn_style = "" -%}
+{%- else -%}
+  {%- capture btn_style -%}style="background-color: {{ custom_color }}; border-color: {{ custom_color }};"{%- endcapture -%}
+{%- endif -%}
+
+<a href="{{ theURL }}" class="blog-button-wrapper">
+  {%- if status == '0' -%}
+    <button class="btn-comingsoon" {{ btn_style }}> 
+      Coming Soon 
+    </button>
+  {%- else -%}
+    <button class="btn-viewproduct" {{ btn_style }}> 
+      View Product 
+    </button>
+  {%- endif -%}
+</a>
 ```
